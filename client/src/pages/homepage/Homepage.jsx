@@ -5,11 +5,17 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { Modal } from "../../components/Modal/Modal";
 import { CreateNewTaskForm } from "../../components/forms/CreateNewTaskForm";
 import { Nav } from "../../components/nav/Nav";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
 export const Homepage = () => {
     const [todos, setTodos] = useState([]);
     const [doings, setDoings] = useState([]);
     const [dones, setDones] = useState([]);
     const [visibility, setVisibility] = useState(false);
+    const token = Cookies.get("userData");
+    const navigate = useNavigate();
+
     useEffect(() => {
         setTodos([
             {
@@ -107,7 +113,7 @@ export const Homepage = () => {
         }
     };
 
-    return (
+    return token ? (
         <DragDropContext onDragEnd={dragEndHandler}>
             <Nav setVisibility={setVisibility} />
             <div className={styled.container}>
@@ -127,5 +133,7 @@ export const Homepage = () => {
                 <CreateNewTaskForm setTodos={setTodos} />
             </Modal>
         </DragDropContext>
+    ) : (
+        navigate("/login")
     );
 };
