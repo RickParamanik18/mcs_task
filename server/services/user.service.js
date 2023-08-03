@@ -60,4 +60,34 @@ const signin = async (params) => {
         };
     }
 };
-module.exports = { login, signin };
+const updateTasks = async (params) => {
+    try {
+        let data = await userRepo.updateTasks(params);
+        if (!data)
+            return {
+                status: 400,
+                msg: "failed",
+            };
+        data = {
+            _id: data._id,
+            name: data.name,
+            email: data.email,
+            tasks: data.tasks,
+        };
+
+        const token = jwt.sign(data, process.env.JWT_SECRET);
+
+        return {
+            status: 200,
+            msg: "success",
+            token,
+        };
+    } catch (err) {
+        console.log(err);
+        return {
+            status: 400,
+            msg: "failed",
+        };
+    }
+};
+module.exports = { login, signin, updateTasks };

@@ -28,7 +28,23 @@ const signin = async (params) => {
         return null;
     }
 };
+const updateTasks = async (params) => {
+    try {
+        const { userData, tasks } = params;
+        await users.updateOne(
+            { email: userData.email },
+            {
+                $set: { tasks },
+            }
+        );
+        const result = await users.findOne({ email: userData.email });
+        return result;
+    } catch (err) {
+        return null;
+    }
+};
 module.exports = {
     login,
     signin,
+    updateTasks,
 };
