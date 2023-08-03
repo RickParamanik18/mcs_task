@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { TaskQueue } from "../../components/taskQueue/TaskQueue";
 import styled from "./style.module.css";
 import { DragDropContext } from "react-beautiful-dnd";
+import { Modal } from "../../components/Modal/Modal";
+import { CreateNewTaskForm } from "../../components/forms/CreateNewTaskForm";
 export const Homepage = () => {
     const [todos, setTodos] = useState([]);
     const [doings, setDoings] = useState([]);
@@ -107,9 +109,16 @@ export const Homepage = () => {
         <DragDropContext onDragEnd={dragEndHandler}>
             <div className={styled.container}>
                 <TaskQueue name="todo" tasks={todos} updateTasks={setTodos} />
-                <TaskQueue name="doing" tasks={doings} updateTasks={setDoings} />
+                <TaskQueue
+                    name="doing"
+                    tasks={doings}
+                    updateTasks={setDoings}
+                />
                 <TaskQueue name="done" tasks={dones} updateTasks={setDones} />
             </div>
+            <Modal title="Create New Task" visibility={true}>
+                <CreateNewTaskForm setTodos={setTodos} />
+            </Modal>
         </DragDropContext>
     );
 };
