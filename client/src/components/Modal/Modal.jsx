@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import styled from "./style.module.css";
 
 export const Modal = (props) => {
-    const { title, children, visibility: vz = false } = props;
-    const [visibility, setVisibility] = useState(vz);
-
+    const { title, children, visibility, setVisibility } = props;
     return (
         <>
             {visibility ? (
