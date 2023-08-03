@@ -1,6 +1,18 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
+var cookieParser = require("cookie-parser");
+const router = require("./router/router");
 require("dotenv").config();
+
+app.use(
+    cors({
+        origin: true,
+        credentials: true,
+    })
+);
+app.use(cookieParser());
+app.use("/api", router);
 
 app.listen(
     process.env.PORT,
