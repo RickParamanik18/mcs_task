@@ -4,10 +4,10 @@
     margin: 10px 0px;
     border-radius: 5px;
     text-align: start;
-    cursor: grab;
 }
 .container h3 {
     padding-bottom: 8px;
+    cursor: text;
 }
 .cross {
     text-align: end;
@@ -18,4 +18,5 @@
 }
 .container p {
     font-size: 14px;
+    cursor: text;
 }

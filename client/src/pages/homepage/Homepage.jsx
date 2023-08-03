@@ -106,9 +106,9 @@ export const Homepage = () => {
     return (
         <DragDropContext onDragEnd={dragEndHandler}>
             <div className={styled.container}>
-                <TaskQueue name="todo" tasks={todos} remove={setTodos} />
-                <TaskQueue name="doing" tasks={doings} remove={setDoings} />
-                <TaskQueue name="done" tasks={dones} remove={setDones} />
+                <TaskQueue name="todo" tasks={todos} updateTasks={setTodos} />
+                <TaskQueue name="doing" tasks={doings} updateTasks={setDoings} />
+                <TaskQueue name="done" tasks={dones} updateTasks={setDones} />
             </div>
         </DragDropContext>
     );

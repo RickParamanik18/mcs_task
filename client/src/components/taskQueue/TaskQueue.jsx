@@ -3,7 +3,7 @@ import { Task } from "../task/Task";
 import styled from "./style.module.css";
 
 export const TaskQueue = (props) => {
-    const { name = "", tasks = [], index = null, remove = null } = props;
+    const { name = "", tasks = [], index = null, updateTasks = null } = props;
     return (
         <>
             <Droppable droppableId={"droppable_" + name}>
@@ -21,7 +21,7 @@ export const TaskQueue = (props) => {
                                 key={index}
                                 index={index}
                                 type={name}
-                                remove={remove}
+                                updateTasks={updateTasks}
                             />
                         ))}
                         {provided.placeholder}
