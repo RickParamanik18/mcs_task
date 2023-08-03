@@ -1,0 +1,8 @@
+.container {
+    border: 5px solid lightblue;
+    width: 100%;
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
