@@ -7,6 +7,7 @@ import { CreateNewTaskForm } from "../../components/forms/CreateNewTaskForm";
 import { Nav } from "../../components/nav/Nav";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { updateTasks } from "../../services/user.service";
 
 export const Homepage = () => {
     const [todos, setTodos] = useState([]);
@@ -94,22 +95,29 @@ export const Homepage = () => {
 
             if (droppable === "todo") {
                 setTodos((prev) => {
-                    prev.splice(destIndex, 0, dragItem);
+                    prev.splice(destIndex, 0, { ...dragItem, status: 0 });
                     return prev;
                 });
             } else if (droppable === "doing") {
                 setDoings((prev) => {
-                    prev.splice(destIndex, 0, dragItem);
+                    prev.splice(destIndex, 0, { ...dragItem, status: 1 });
                     return prev;
                 });
             } else {
                 setDones((prev) => {
-                    prev.splice(destIndex, 0, dragItem);
+                    prev.splice(destIndex, 0, { ...dragItem, status: 2 });
                     return prev;
                 });
             }
 
             //api call
+            updateTasks(token, [...todos, ...doings, ...dones]).then((data) => {
+                if (data) {
+                    if (data.status == "200") {
+                        navigate("/");
+                    }
+                }
+            });
         }
     };
 

@@ -41,3 +41,17 @@ export const logout = async (authorization) => {
         return null;
     }
 };
+
+export const updateTasks = async (authorization, data) => {
+    try {
+        const result = await axios({
+            url: `${import.meta.env.VITE_APP_SERVER_API}user/tasks`,
+            method: "post",
+            headers: { authorization, ...data },
+            withCredentials: true,
+        });
+        return result.data;
+    } catch (err) {
+        return null;
+    }
+};
